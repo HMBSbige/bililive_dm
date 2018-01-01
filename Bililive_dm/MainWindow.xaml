@@ -8,7 +8,7 @@
         xmlns:bilibiliDmPluginFramework="clr-namespace:BilibiliDM_PluginFramework;assembly=BilibiliDM_PluginFramework"
         xmlns:s="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="B站彈幕姬" Height="409" Width="601">
+        Title="B站弹幕姬" Height="409" Width="601">
     <Window.Resources>
         <bililiveDm:PluginStatusConverter x:Key="Converter"></bililiveDm:PluginStatusConverter>
 
@@ -31,7 +31,7 @@
             <Button x:Name="ConnBtn" Content="连接" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="connbtn_Click" Margin="28,0,0,0" Width="70" />
 
-            <Button Content="斷開" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
+            <Button Content="断开" Margin="28,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="70" x:Name="DisconnBtn" Click="Disconnbtn_OnClick"/>
             <Button x:Name="Test" Content="测试效果" HorizontalAlignment="Left" VerticalAlignment="Center"
                     Click="Test_OnClick" Margin="28,0,0,0" Width="70" />
 
@@ -88,7 +88,7 @@
                         d:DataContext="{d:DesignInstance bililiveDm:SessionItem}" Grid.Row="0">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{Binding UserName}" Header="用户名"/>
-                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="數量" SortDirection="Descending"/>
+                            <DataGridTextColumn Binding="{Binding num}" ClipboardContentBinding="{Binding num}" Header="数量" SortDirection="Descending"/>
                             <DataGridTextColumn Binding="{Binding Item}" ClipboardContentBinding="{Binding Item}" Header="物品" SortDirection="Descending"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -122,7 +122,7 @@
                 <Grid>
                     <bililiveDm:OptionDialog x:Name="OptionDialog"/>
                     <CheckBox Content="伪春菜联动" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="SSTP" IsChecked="False" Panel.ZIndex="-1" Margin="0,500,0,0" Checked="SSTP_OnChecked" Unchecked="SSTP_OnUnchecked"/>
-                    <CheckBox Content="顯示出錯信息" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
+                    <CheckBox Content="显示出错信息" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ShowError" IsChecked="False" Panel.ZIndex="-1" Margin="0,514,0,0" Checked="ShowError_OnChecked" Unchecked="ShowError_OnUnchecked"/>
 <!--                    <Button Content="魔法" HorizontalAlignment="Left" VerticalAlignment="Top" Click="Magic_clicked" Panel.ZIndex="-1" Margin="0,530,0,0" />-->
                 </Grid>
             </TabItem>
@@ -138,12 +138,12 @@
                             <DataGridTextColumn Binding="{Binding PluginName}" ClipboardContentBinding="{Binding PluginName}" Header="插件名称"/>
                             <DataGridTextColumn Binding="{Binding PluginDesc}" ClipboardContentBinding="{Binding PluginDesc}" Header="插件描述"/>
                             <DataGridTextColumn Binding="{Binding PluginAuth}" ClipboardContentBinding="{Binding PluginAuth}" Header="插件作者"/>
-                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="插件狀態"/>
+                            <DataGridTextColumn Binding="{Binding Status,Converter={StaticResource Converter}}" Header="插件状态"/>
                             <DataGridTextColumn Binding="{Binding PluginVer}" ClipboardContentBinding="{Binding PluginVer}" Header="插件版本"/>
                         </DataGrid.Columns>
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="啟用插件" Click="Plugin_Enable"/>
+                                <MenuItem Header="启用插件" Click="Plugin_Enable"/>
                                 <MenuItem Header="停用插件" Click="Plugin_Disable"/>
                                 <MenuItem Header="管理" Click="Plugin_admin"/>
 

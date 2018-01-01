@@ -11,11 +11,11 @@ namespace Bililive_dm
 
             if ((bool) value == true)
             {
-                return "已啟用";
+                return "已启用";
             }
             else
             {
-                return "未啟用";
+                return "未启用";
             }
         }
 

@@ -39,14 +39,14 @@ namespace Bililive_dm
         }
     }
     /// <summary>
-    /// OptionDialog.xaml 的互動邏輯
+    /// OptionDialog.xaml 的互动逻辑
     /// </summary>
     public partial class OptionDialog 
     {
         public OptionDialog()
         {
             this.InitializeComponent();
-            // 在此點下方插入建立物件所需的程式碼。
+            // 在此点下方插入建立物件所需的程式码。
         }
 
 

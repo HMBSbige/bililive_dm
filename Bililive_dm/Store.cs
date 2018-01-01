@@ -15,7 +15,7 @@ namespace Bililive_dm
         public static double MainOverlayYoffset = 0;
         public static double MainOverlayWidth = 250;
         public static double MainOverlayEffect1 = 0.8; //拉伸
-        public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出現
+        public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出现
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留
         public static double MainOverlayEffect4 = 1; //窗口消失
         public static double MainOverlayFontsize = 18.667;
@@ -33,7 +33,7 @@ namespace Bililive_dm
         public static double MainOverlayYoffset = 0;
         public static double MainOverlayWidth = 250;
         public static double MainOverlayEffect1 = 0.8; //拉伸
-        public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出現
+        public static double MainOverlayEffect2 = 1.4 - 0.8; //文字出现
         public static double MainOverlayEffect3 = 6 - 1.4; //文字停留
         public static double MainOverlayEffect4 = 1; //窗口消失
         public static double MainOverlayFontsize = 18.667;
@@ -71,7 +71,7 @@ namespace Bililive_dm
                 if (plugin != null)
                 {
                     MessageBox.Show(
-                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                        "插件" + plugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + plugin.PluginAuth + ", 联系方式 " +
                         plugin.PluginCont);
                     try
                     {
@@ -79,10 +79,10 @@ namespace Bililive_dm
 
 
                         using (
-                            StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt")
+                            StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬插件" + plugin.PluginName + "错误报告.txt")
                             )
                         {
-                            outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                            outfile.WriteLine("请有空发给联系方式 " + plugin.PluginCont + " 谢谢");
                             outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
                             outfile.Write(ex.ToString());
                         }
@@ -96,15 +96,15 @@ namespace Bililive_dm
                 else
                 {
                     MessageBox.Show(
-               "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
+               "遇到了不明错误: 日志已经保存在桌面, 请有空发给 copyliu@gmail.com ");
                     try
                     {
                         string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                        using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
+                        using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬错误报告.txt"))
                         {
-                            outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
+                            outfile.WriteLine("请有空发给 copyliu@gmail.com 谢谢");
                             outfile.WriteLine(DateTime.Now + "");
                             outfile.Write(ex.ToString());
                         }

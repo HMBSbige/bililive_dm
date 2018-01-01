@@ -92,6 +92,6 @@
         <TextBlock TextWrapping="Wrap" Text="注意: 新弹幕引擎下文字速度选项无效" VerticalAlignment="Center" TextAlignment="Right"
                        Margin="0,0,20,0" HorizontalAlignment="Left" />
         <Button Content="测试效果" Click="ButtonBase_OnClick" />
-        <Button Content="還原默認" Click="ButtonBase_OnClick2" />
+        <Button Content="还原默认" Click="ButtonBase_OnClick2" />
     </StackPanel>
 </UserControl>

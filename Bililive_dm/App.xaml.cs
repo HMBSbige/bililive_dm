@@ -14,7 +14,7 @@ using BilibiliDM_PluginFramework;
 namespace Bililive_dm
 {
     /// <summary>
-    /// App.xaml 的互動邏輯
+    /// App.xaml 的互动逻辑
     /// </summary>
     public partial class App : Application
     {
@@ -40,15 +40,15 @@ namespace Bililive_dm
             DispatcherUnhandledExceptionEventArgs e)
         {
             MessageBox.Show(
-                "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給 copyliu@gmail.com ");
+                "遇到了不明错误: 日志已经保存在桌面, 请有空发给 copyliu@gmail.com ");
             try
             {
                 string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬錯誤報告.txt"))
+                using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬错误报告.txt"))
                 {
-                    outfile.WriteLine("請有空發給 copyliu@gmail.com 謝謝");
+                    outfile.WriteLine("请有空发给 copyliu@gmail.com 谢谢");
                     outfile.WriteLine(DateTime.Now +"");
                     outfile.Write(e.Exception.ToString());
                     outfile.WriteLine("-------插件列表--------");

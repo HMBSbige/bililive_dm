@@ -19,7 +19,7 @@ using System.ComponentModel;
 namespace Bililive_dm
 {
     /// <summary>
-    /// WpfDanmakuOverlay.xaml 的互動邏輯
+    /// WpfDanmakuOverlay.xaml 的互动逻辑
     /// </summary>
     public partial class WpfDanmakuOverlay : Window, IDanmakuWindow
     {

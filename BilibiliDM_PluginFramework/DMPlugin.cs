@@ -31,15 +31,15 @@ namespace BilibiliDM_PluginFramework
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                    "插件" + PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + PluginAuth + ", 联系方式 " + PluginCont);
                 try
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬插件" + PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + PluginCont + " 谢谢");
                         outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -63,15 +63,15 @@ namespace BilibiliDM_PluginFramework
             {
 
                 MessageBox.Show(
-                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                    "插件" + PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + PluginAuth + ", 联系方式 " + PluginCont);
                 try
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬插件" + PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + PluginCont + " 谢谢");
                         outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -95,15 +95,15 @@ namespace BilibiliDM_PluginFramework
             {
 
                 MessageBox.Show(
-                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                    "插件" + PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + PluginAuth + ", 联系方式 " + PluginCont);
                 try
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬插件" + PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + PluginCont + " 谢谢");
                         outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -128,15 +128,15 @@ namespace BilibiliDM_PluginFramework
             {
 
                 MessageBox.Show(
-                    "插件" + PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + PluginAuth + ", 聯繫方式 " + PluginCont);
+                    "插件" + PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + PluginAuth + ", 联系方式 " + PluginCont);
                 try
                 {
                     string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (StreamWriter outfile = new StreamWriter(path + @"\B站彈幕姬插件" + PluginName + "錯誤報告.txt"))
+                    using (StreamWriter outfile = new StreamWriter(path + @"\B站弹幕姬插件" + PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + PluginCont + " 谢谢");
                         outfile.WriteLine(PluginName + " " + PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -151,33 +151,33 @@ namespace BilibiliDM_PluginFramework
         }
 
         /// <summary>
-        /// 插件名稱
+        /// 插件名称
         /// </summary>
-        public string PluginName { get; set; } = "這是插件";
+        public string PluginName { get; set; } = "这是插件";
 
         /// <summary>
         /// 插件作者
         /// </summary>
-        public string PluginAuth { get; set; } = "這是作者";
+        public string PluginAuth { get; set; } = "这是作者";
 
         /// <summary>
-        /// 插件作者聯繫方式
+        /// 插件作者联系方式
         /// </summary>
-        public string PluginCont { get; set; } = "這是聯繫方式";
+        public string PluginCont { get; set; } = "这是联系方式";
 
         /// <summary>
-        /// 插件版本號
+        /// 插件版本号
         /// </summary>
-        public string PluginVer { get; set; } = "這是版本號";
+        public string PluginVer { get; set; } = "这是版本号";
         /// <summary>
         /// 插件描述
         /// </summary>
-        public string PluginDesc { get; set; } = "描述還沒填";
+        public string PluginDesc { get; set; } = "描述还没填";
 
         /// <summary>
-        /// 插件描述, 已過期, 請使用PluginDesc
+        /// 插件描述, 已过期, 请使用PluginDesc
         /// </summary>
-        [Obsolete("手滑產品, 請使用PluginDesc")]
+        [Obsolete("手滑产品, 请使用PluginDesc")]
         public string PlubinDesc
         {
             get { return this.PluginDesc; }
@@ -185,7 +185,7 @@ namespace BilibiliDM_PluginFramework
         }
 
         /// <summary>
-        /// 插件狀態
+        /// 插件状态
         /// </summary>
         public bool Status
         {
@@ -198,7 +198,7 @@ namespace BilibiliDM_PluginFramework
             }
         }
         /// <summary>
-        /// 當前連接中的房間
+        /// 当前连接中的房间
         /// </summary>
         public int? RoomId => RoomID;
 
@@ -209,7 +209,7 @@ namespace BilibiliDM_PluginFramework
                 
         }
         /// <summary>
-        /// 啟用插件方法 請重寫此方法
+        /// 启用插件方法 请重写此方法
         /// </summary>
         public virtual void Start()
         {
@@ -217,7 +217,7 @@ namespace BilibiliDM_PluginFramework
             Console.WriteLine(this.PluginName+" Start!");
         }
         /// <summary>
-        /// 禁用插件方法 請重寫此方法
+        /// 禁用插件方法 请重写此方法
         /// </summary>
         public virtual void Stop()
         {
@@ -226,7 +226,7 @@ namespace BilibiliDM_PluginFramework
             Console.WriteLine(this.PluginName + " Stop!");
         }
         /// <summary>
-        /// 管理插件方法 請重寫此方法
+        /// 管理插件方法 请重写此方法
         /// </summary>
         public virtual void Admin()
         {
@@ -271,7 +271,7 @@ namespace BilibiliDM_PluginFramework
             }
         }
         /// <summary>
-        /// 打彈幕
+        /// 打弹幕
         /// </summary>
         /// <param name="text"></param>
         /// <param name="fullscreen"></param>

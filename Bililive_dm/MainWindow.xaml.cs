@@ -26,7 +26,7 @@ using System.Windows.Navigation;
 namespace Bililive_dm
 {
     /// <summary>
-    ///     MainWindow.xaml 的互動邏輯
+    ///     MainWindow.xaml 的互动逻辑
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -107,7 +107,7 @@ namespace Bililive_dm
             else
             {
 
-                Title += "   *傻逼版本*";
+                Title += "   *离线版本*";
 #if !DEBUG
                 if(!(Debugger.IsAttached || offline_mode))
                 {
@@ -377,16 +377,16 @@ namespace Bililive_dm
                 catch (Exception ex)
                 {
                     MessageBox.Show(
-                        "插件" + dmPlugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + dmPlugin.PluginAuth + ", 聯繫方式 " +
+                        "插件" + dmPlugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + dmPlugin.PluginAuth + ", 联系方式 " +
                         dmPlugin.PluginCont);
                     try
                     {
                         var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                        using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + dmPlugin.PluginName + "錯誤報告.txt"))
+                        using (var outfile = new StreamWriter(path + @"\B站弹幕姬插件" + dmPlugin.PluginName + "错误报告.txt"))
                         {
-                            outfile.WriteLine("請有空發給聯繫方式 " + dmPlugin.PluginCont + " 謝謝");
+                            outfile.WriteLine("请有空发给联系方式 " + dmPlugin.PluginCont + " 谢谢");
                             outfile.Write(ex.ToString());
                         }
                     }
@@ -506,9 +506,9 @@ namespace Bililive_dm
 
                 if (connectresult)
                 {
-                    errorlogging("連接成功");
-                    AddDMText("彈幕姬報告", "連接成功", true);
-                    SendSSP("連接成功");
+                    errorlogging("连接成功");
+                    AddDMText("弹幕姬报告", "连接成功", true);
+                    SendSSP("连接成功");
                     Ranking.Clear();
                     SaveRoomId(roomId);
 
@@ -529,9 +529,9 @@ namespace Bililive_dm
                 }
                 else
                 {
-                    logging("連接失敗");
-                    SendSSP("連接失敗");
-                    AddDMText("彈幕姬報告", "連接失敗", true);
+                    logging("连接失败");
+                    SendSSP("连接失败");
+                    AddDMText("弹幕姬报告", "连接失败", true);
 
                     ConnBtn.IsEnabled = true;
                 }
@@ -545,8 +545,8 @@ namespace Bililive_dm
 
         private void b_ReceivedRoomCount(object sender, ReceivedRoomCountArgs e)
         {
-//            logging("當前房間人數:" + e.UserCount);
-//            AddDMText("當前房間人數", e.UserCount+"", true);
+//            logging("当前房间人数:" + e.UserCount);
+//            AddDMText("当前房间人数", e.UserCount+"", true);
             //AddDMText(e.Danmaku.CommentUser, e.Danmaku.CommentText);
             if (CheckAccess())
             {
@@ -617,8 +617,8 @@ namespace Bililive_dm
             switch (danmakuModel.MsgType)
             {
                 case MsgTypeEnum.Comment:
-                    logging("收到彈幕:" + (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
-                            danmakuModel.UserName + " 說: " + danmakuModel.CommentText);
+                    logging("收到弹幕:" + (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
+                            danmakuModel.UserName + " 说: " + danmakuModel.CommentText);
 
                     AddDMText(
                         (danmakuModel.isAdmin ? "[管]" : "") + (danmakuModel.isVIP ? "[爷]" : "") +
@@ -786,15 +786,15 @@ namespace Bililive_dm
                 }).Start();
             }
 
-            errorlogging("連接被斷開: 开发者信息" + args.Error);
-            AddDMText("彈幕姬報告", "連接被斷開", true);
-            SendSSP("連接被斷開");
+            errorlogging("连接被断开: 开发者信息" + args.Error);
+            AddDMText("弹幕姬报告", "连接被断开", true);
+            SendSSP("连接被断开");
             if (CheckAccess())
             {
                 if (AutoReconnect.IsChecked == true && args.Error != null)
                 {
                     errorlogging("正在自动重连...");
-                    AddDMText("彈幕姬報告", "正在自动重连", true);
+                    AddDMText("弹幕姬报告", "正在自动重连", true);
                     connbtn_Click(null, null);
                 }
                 else
@@ -809,7 +809,7 @@ namespace Bililive_dm
                     if (AutoReconnect.IsChecked == true && args.Error != null)
                     {
                         errorlogging("正在自动重连...");
-                        AddDMText("彈幕姬報告", "正在自动重连", true);
+                        AddDMText("弹幕姬报告", "正在自动重连", true);
                         connbtn_Click(null, null);
                     }
                     else
@@ -940,13 +940,13 @@ namespace Bililive_dm
             var n = ran.Next(100);
             if (n > 98)
             {
-                AddDMText("彈幕姬報告", "這不是個測試", false);
+                AddDMText("弹幕姬报告", "这不是个测试", false);
             }
             else
             {
-                AddDMText("彈幕姬報告", "這是一個測試", false);
+                AddDMText("弹幕姬报告", "这是一个测试", false);
             }
-            SendSSP("彈幕姬測試");
+            SendSSP("弹幕姬测试");
             foreach (var dmPlugin in App.Plugins.Where(dmPlugin => dmPlugin.Status))
             {
                 new Thread(() =>
@@ -958,8 +958,8 @@ namespace Bililive_dm
                             Danmaku =
                                 new DanmakuModel
                                 {
-                                    CommentText = "插件彈幕測試",
-                                    UserName = "彈幕姬",
+                                    CommentText = "插件弹幕测试",
+                                    UserName = "弹幕姬",
                                     MsgType = MsgTypeEnum.Comment
                                 }
                         };
@@ -1078,16 +1078,16 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                    "插件" + plugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + plugin.PluginAuth + ", 联系方式 " +
                     plugin.PluginCont);
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    using (var outfile = new StreamWriter(path + @"\B站弹幕姬插件" + plugin.PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + plugin.PluginCont + " 谢谢");
                         outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1116,16 +1116,16 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                    "插件" + plugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + plugin.PluginAuth + ", 联系方式 " +
                     plugin.PluginCont);
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    using (var outfile = new StreamWriter(path + @"\B站弹幕姬插件" + plugin.PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine("請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine("请有空发给联系方式 " + plugin.PluginCont + " 谢谢");
                         outfile.WriteLine(DateTime.Now + " " + plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1154,16 +1154,16 @@ namespace Bililive_dm
             catch (Exception ex)
             {
                 MessageBox.Show(
-                    "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                    "插件" + plugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + plugin.PluginAuth + ", 联系方式 " +
                     plugin.PluginCont);
                 try
                 {
                     var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
 
-                    using (var outfile = new StreamWriter(path + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                    using (var outfile = new StreamWriter(path + @"\B站弹幕姬插件" + plugin.PluginName + "错误报告.txt"))
                     {
-                        outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                        outfile.WriteLine(DateTime.Now + " " + "请有空发给联系方式 " + plugin.PluginCont + " 谢谢");
                         outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                         outfile.Write(ex.ToString());
                     }
@@ -1246,15 +1246,15 @@ namespace Bililive_dm
                 catch(Exception ex)
                 {
                     MessageBox.Show(
-                        "插件" + plugin.PluginName + "遇到了不明錯誤: 日誌已經保存在桌面, 請有空發給該插件作者 " + plugin.PluginAuth + ", 聯繫方式 " +
+                        "插件" + plugin.PluginName + "遇到了不明错误: 日志已经保存在桌面, 请有空发给该插件作者 " + plugin.PluginAuth + ", 联系方式 " +
                         plugin.PluginCont);
                     try
                     {
                         var desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
-                        using(var outfile = new StreamWriter(desktop + @"\B站彈幕姬插件" + plugin.PluginName + "錯誤報告.txt"))
+                        using(var outfile = new StreamWriter(desktop + @"\B站弹幕姬插件" + plugin.PluginName + "错误报告.txt"))
                         {
-                            outfile.WriteLine(DateTime.Now + " " + "請有空發給聯繫方式 " + plugin.PluginCont + " 謝謝");
+                            outfile.WriteLine(DateTime.Now + " " + "请有空发给联系方式 " + plugin.PluginCont + " 谢谢");
                             outfile.WriteLine(plugin.PluginName + " " + plugin.PluginVer);
                             outfile.Write(ex.ToString());
                         }
