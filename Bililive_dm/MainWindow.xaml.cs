@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
 using System.Deployment.Application;
 using System.Diagnostics;
 using System.IO;
 using System.IO.IsolatedStorage;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,7 +24,16 @@ using System.Xml.Serialization;
 using BilibiliDM_PluginFramework;
 using BiliDMLib;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Navigation;
+using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using Application = System.Windows.Application;
+using Clipboard = System.Windows.Clipboard;
+using ContextMenu = System.Windows.Controls.ContextMenu;
+using DataGrid = System.Windows.Controls.DataGrid;
+using MenuItem = System.Windows.Controls.MenuItem;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Bililive_dm
 {
@@ -52,10 +64,36 @@ namespace Bililive_dm
         private readonly DispatcherTimer timer;
         private readonly DispatcherTimer timer_magic;
         private Thread releaseThread;
+        private Regex FilterRegex;
+
+        private bool net461 = false;
+
+        private  void Get45or451FromRegistry()
+        {
+            using (RegistryKey ndpKey = RegistryKey.OpenBaseKey(RegistryHive.LocalMachine, RegistryView.Registry32).OpenSubKey("SOFTWARE\\Microsoft\\NET Framework Setup\\NDP\\v4\\Full\\"))
+            {
+                int releaseKey = Convert.ToInt32(ndpKey?.GetValue("Release"));
+                if (releaseKey >= 394254)
+                {
+                    net461 = true;
+                }
+                else
+                {
+                    net461 = false;
+                }
+            }
+        }
 
         public MainWindow()
         {
             InitializeComponent();
+            Get45or451FromRegistry();
+            if (!net461)
+            {
+                MessageBox.Show(this,
+                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
+为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
+            }
             HelpWeb.Navigated+=HelpWebOnNavigated;
             //初始化日志
 
@@ -72,8 +110,18 @@ namespace Bililive_dm
             {
                 
             }
-          
-            
+
+            try
+            {
+                ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            }
+            catch (ConfigurationErrorsException ex)
+            {//重置修复错误的配置文件
+                string filename = ex.Filename;
+                File.Delete(filename);
+                Properties.Settings.Default.Reload();
+
+            }
 
             try
             {
@@ -186,6 +234,28 @@ namespace Bililive_dm
                             if (_danmakuQueue.Any())
                             {
                                 var danmaku = _danmakuQueue.Dequeue();
+                                if (danmaku.MsgType == MsgTypeEnum.Comment && enable_regex)
+                                {
+                                    if (FilterRegex.IsMatch(danmaku.CommentText)) continue;
+                                 
+                                }
+
+                                if (danmaku.MsgType == MsgTypeEnum.Comment && ignorespam_enabled)
+                                {
+                                    try
+                                    {
+                                        var jobj = (JObject) danmaku.RawDataJToken;
+                                        if (jobj["info"][0][9].Value<int>() != 0)
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    catch (Exception e)
+                                    {
+                                      
+                                    }
+                                  
+                                }
                                 ProcDanmaku(danmaku);
                                 if (danmaku.MsgType == MsgTypeEnum.Comment)
                                 {
@@ -212,10 +282,17 @@ namespace Bililive_dm
             {
                 _messageQueue.Add("");
             }
-            logging("公告: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云. ");
+            if (!net461)
+            {
+                logging(
+                    @"弹幕姬决定下版本开始停止支持Windows XP, 最低要求更改至 Win7 和 .NET 4.6.1, 
+为保证你能在今后使用弹幕姬, 请安装最新的 .net framework .");
+            }
+            logging("公告1: 由于廉价的证书供应商被某虎公司搞死了于是没钱买证书了, 所以使用本软件时可能会跳安全提示请无需理会. ");
+            logging("公告2: 最近出现了一些所谓弹幕姬后续版, 声称本软件已经不再更新, 并自称后续版是原作者开发是新版云云. ");
             logging("对此进行澄清, 弹幕姬从来也不会有任何的所谓后续版, 原作者直播间ID是5051, 任何非本人所开发的软件的一切问题均不能解答. ");
             logging("也请用户在咨询时, 确认清楚你所使用的软件类型, 向正确的关系者咨询. 谢谢. ");
-            logging("投喂记录不会在弹幕模式上出现, 这不是bug");
+            logging("公告3: 投喂记录不会在弹幕模式上出现, 这不是bug");
             logging("可以点击日志复制到剪贴板");
             if (debug_mode)
             {
@@ -302,8 +379,12 @@ namespace Bililive_dm
             SideBar.IsChecked = overlay_enabled;
             SaveLog.IsChecked = savelog_enabled;
             SSTP.IsChecked = sendssp_enabled;
+            EnableRegex.IsChecked = enable_regex;
+            IgnoreSpam.IsChecked = ignorespam_enabled;
             ShowItem.IsChecked = showvip_enabled;
             ShowError.IsChecked = showerror_enabled;
+            regex = Regex.Text.Trim();
+            FilterRegex=new Regex(regex);
             var sc = Log.Template.FindName("LogScroll", Log) as ScrollViewer;
             sc?.ScrollToEnd();
 
@@ -498,7 +579,7 @@ namespace Bililive_dm
                     else
                         trytime++;
 
-                    await TaskEx.Delay(1000); // 稍等一下
+                    await Task.Delay(1000); // 稍等一下
                     logging("正在连接");
                     connectresult = await b.ConnectAsync(roomId);
                 }
@@ -750,7 +831,7 @@ namespace Bililive_dm
             }
             if (rawoutput_mode)
             {
-                logging(danmakuModel.RawData);
+                logging(danmakuModel.RawDataJToken.ToString());
             }
         }
 
@@ -1375,6 +1456,10 @@ namespace Bililive_dm
         private bool showvip_enabled = true;
         private bool showerror_enabled = true;
         private bool rawoutput_mode = false;
+        private bool enable_regex = false;
+        private string regex = "";
+        private bool ignorespam_enabled = false;
+
         public bool debug_mode { get; private set; }
 
         #endregion
@@ -1382,6 +1467,39 @@ namespace Bililive_dm
         private void Magic_clicked(object sender, RoutedEventArgs e)
         {
             Magic();
+        }
+        private void Enableregex_OnChecked(object sender, RoutedEventArgs e)
+        {
+            enable_regex = true;
+        }
+
+        private void Enableregex_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            enable_regex = false;
+        }
+
+        private void Regex_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                FilterRegex = new Regex(Regex.Text.Trim());
+            }
+            catch (Exception exception)
+            {
+                
+            }
+        }
+
+        private void IgnoreSpam_OnChecked(object sender, RoutedEventArgs e)
+        {
+            ignorespam_enabled = true;
+            //TODO 保存配置
+        }
+
+        private void IgnoreSpam_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            ignorespam_enabled = false;
+            //TODO 保存配置
         }
     }
 }
